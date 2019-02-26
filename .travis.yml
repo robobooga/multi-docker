@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t ntan/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t robobooga/react-test -f ./client/Dockerfile.dev ./client
 
 script: 
-  - docker run ntan/react-test npm test -- --coverage
+  - docker run robobooga/react-test npm test -- --coverage
   
 after_success:
-  - docker build -t ntan/multi-client ./client
-  - docker build -t ntan/multi-nginx ./nginx
-  - docker build -t ntan/multi-server ./server
-  - docker build -t ntan/multi-worker ./worker
+  - docker build -t robobooga/multi-client ./client
+  - docker build -t robobooga/multi-nginx ./nginx
+  - docker build -t robobooga/multi-server ./server
+  - docker build -t robobooga/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   
-  - docker push ntan/multi-client
-  - docker push ntan/multi-nginx
-  - docker push ntan/multi-server
-  - docker push ntan/multi-worker
+  - docker push robobooga/multi-client
+  - docker push robobooga/multi-nginx
+  - docker push robobooga/multi-server
+  - docker push robobooga/multi-worker
